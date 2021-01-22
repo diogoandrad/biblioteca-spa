@@ -1,4 +1,5 @@
 <br><button type="button" class="btn btn-primary" (click)="openModalForm(form, undefined)">Adicionar Livro</button>
+
 <div class="container"><br>
   <table class="table">
     <thead>
@@ -8,7 +9,7 @@
         <th>Quantidade de Páginas</th>
         <th>Ano de Publicação</th>
         <th>Versão</th>
-        <th>Autor</th>
+        <th>Autores</th>
         <th style="text-align: center;">Ações</th>
       </tr>
     </thead>
@@ -21,16 +22,19 @@
         <td>{{ book.version }}</td>
         <td>{{ book.authors }}</td>
         <td style="text-align: center;">
-            <button type="button" class="btn btn-secondary btn-sm" (click)="openModalInfo(info, book.id)"><i class="bi bi-info-square"></i></button>&nbsp;
-            <button type="button" class="btn btn-warning btn-sm" (click)="openModalForm(form, book.id)"><i class="bi bi-pencil-square"></i></button>&nbsp;
-            <button type="button" class="btn btn-danger btn-sm" (click)="deleteBook(book.id)"><i class="bi bi-trash"></i></button>
+          <button type="button" class="btn btn-secondary btn-sm" (click)="openModalInfo(info, book.id)">
+            <i class="bi bi-info-square"></i></button>&nbsp;
+          <button type="button" class="btn btn-warning btn-sm" (click)="openModalForm(form, book.id)">
+            <i class="bi bi-pencil-square"></i></button>&nbsp;
+          <button type="button" class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">
+            <i class="bi bi-trash"></i></button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<!-- Adicionar ou Editar novo Livro -->
+<!-- Modal Form Adicionar ou Editar Livro -->
 <ng-template #form>
   <div class="modal-header">
     <h4 class="modal-title pull-left">
@@ -46,29 +50,29 @@
     <div class="modal-body" *ngIf="!bookInfo">
       <div class="mb-3">
         <label for="title" class="form-label">Título</label>
-        <input class="form-control" type="text" name="title" placeholder="Digite o Título" value="" ngModel required>
+        <input class="form-control" type="text" name="title" placeholder="Digite o Título" ngModel required>
       </div>
       <div class="mb-3">
-        <label for="caption" class="form-label">SubTítulo</label>
-        <input class="form-control" type="text" name="caption" placeholder="Digite o SubTítulo" value="" ngModel required>
+        <label for="caption" class="form-label">Subtítulo</label>
+        <input class="form-control" type="text" name="caption" placeholder="Digite o Subtítulo" ngModel required>
       </div>
       <div class="row">
         <div class="col mb-3">
           <label for="pages" class="form-label">Nº de Páginas</label>
-          <input class="form-control" type="number" name="pages" placeholder="Nº de Páginas" value="" ngModel required>
+          <input class="form-control" type="number" name="pages" placeholder="Nº de Páginas" ngModel required>
         </div>
         <div class="col mb-3">
           <label for="year" class="form-label">Ano</label>
-          <input class="form-control" type="number" name="year" placeholder="Ano" value="" ngModel required>
+          <input class="form-control" type="number" name="year" placeholder="Ano" ngModel required>
         </div>
         <div class="col mb-3">
           <label for="version" class="form-label">Versão</label>
-          <input class="form-control" type="number" name="version" placeholder="Versão" value="" ngModel required>
+          <input class="form-control" type="text" name="version" placeholder="Versão" ngModel required>
         </div>
       </div>
       <div class="mb-3">
-        <label for="authors" class="form-label">Autor</label>
-        <input class="form-control" type="text" name="authors" placeholder="Nome do Author" value="" ngModel required>
+        <label for="authors" class="form-label">Autores</label>
+        <input class="form-control" type="text" name="authors" placeholder="Nomes dos Autores" ngModel required>
       </div>
     </div>
     <!-- End Form Create -->
@@ -76,29 +80,35 @@
     <div class="modal-body" *ngIf="bookInfo">
       <div class="mb-3">
         <label for="title" class="form-label">Título</label>
-        <input class="form-control" type="text" name="title" placeholder="Digite o Título" [(ngModel)]="bookInfo.title" required>
+        <input class="form-control" type="text" name="title" placeholder="Digite o Título"
+          [(ngModel)]="bookInfo.title" required>
       </div>
       <div class="mb-3">
         <label for="caption" class="form-label">SubTítulo</label>
-        <input class="form-control" type="text" name="caption" placeholder="Digite o SubTítulo" [(ngModel)]="bookInfo.caption" required>
+        <input class="form-control" type="text" name="caption" placeholder="Digite o SubTítulo"
+          [(ngModel)]="bookInfo.caption" required>
       </div>
       <div class="row">
         <div class="col mb-3">
           <label for="pages" class="form-label">Nº de Páginas</label>
-          <input class="form-control" type="number" name="pages" placeholder="Nº de Páginas" [(ngModel)]="bookInfo.pages" required>
+          <input class="form-control" type="number" name="pages" placeholder="Nº de Páginas"
+            [(ngModel)]="bookInfo.pages" required>
         </div>
         <div class="col mb-3">
           <label for="year" class="form-label">Ano</label>
-          <input class="form-control" type="number" name="year" placeholder="Ano" [(ngModel)]="bookInfo.year" required>
+          <input class="form-control" type="number" name="year" placeholder="Ano"
+            [(ngModel)]="bookInfo.year" required>
         </div>
         <div class="col mb-3">
           <label for="version" class="form-label">Versão</label>
-          <input class="form-control" type="number" name="version" placeholder="Versão" [(ngModel)]="bookInfo.version" required>
+          <input class="form-control" type="text" name="version" placeholder="Versão"
+            [(ngModel)]="bookInfo.version" required>
         </div>
       </div>
       <div class="mb-3">
-        <label for="authors" class="form-label">Autor</label>
-        <input class="form-control" type="text" name="authors" placeholder="Nome do Author" [(ngModel)]="bookInfo.authors" required>
+        <label for="authors" class="form-label">Autores</label>
+        <input class="form-control" type="text" name="authors" placeholder="Nomes dos Autores"
+          [(ngModel)]="bookInfo.authors" required>
       </div>
     </div>
     <!-- End Form Update -->
@@ -110,7 +120,7 @@
 </ng-template>
 <!-- End -->
 
-<!-- Informações -->
+<!-- Modal Informações -->
 <ng-template #info>
   <div class="modal-header">
     <h4 class="modal-title pull-left">
@@ -126,7 +136,7 @@
     <strong>Quantidade de Páginas: </strong><i *ngIf="bookInfo">{{ bookInfo.pages }}</i><br>
     <strong>Ano de Publicação: </strong><i *ngIf="bookInfo">{{ bookInfo.year }}</i><br>
     <strong>Versão: </strong><i *ngIf="bookInfo">{{ bookInfo.version }}</i><br>
-    <strong>Autor: </strong><i *ngIf="bookInfo">{{ bookInfo.authors }}</i>
+    <strong>Autores: </strong><i *ngIf="bookInfo">{{ bookInfo.authors }}</i>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" (click)="modalRef.hide()">Fechar</button>
