@@ -27,7 +27,10 @@ export class BookComponent implements OnInit {
     this.modalRef = this.modalService.show(form);
     this.idAtual = id;
 
-    if (id) this.getBookById(id);
+    if (id)
+      this.getBookById(id);
+    else
+      this.bookInfo = undefined
 
     console.log(id);
   }
@@ -38,15 +41,7 @@ export class BookComponent implements OnInit {
     if (id)
       this.getBookById(id);
     else
-      this.bookInfo = {
-        id: '',
-        title: '',
-        caption: '',
-        pages: 0,
-        year: 0,
-        version: 0,
-        authors!: '',
-      };
+      this.bookInfo = undefined
 
     console.log(id, this.bookInfo);
   }
