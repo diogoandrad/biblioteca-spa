@@ -42,7 +42,7 @@ export class BookComponent implements OnInit {
     if (id)
       this.getBookById(id);
     else
-      this.bookInfo = undefined
+      this.bookInfo = undefined;
 
     console.log(id);
   }
@@ -95,9 +95,9 @@ export class BookComponent implements OnInit {
   }
 
   onSubmit(myForm: NgForm) {
-    console.log(this.idAtual);
+    myForm.value.version = Number(myForm.value.version);
+
     if (!this.idAtual) { // Adicionar
-      console.log(myForm.value.id);
       this.bookService.addBook(myForm.value).subscribe(
         (book: Book) => {
           this.getBooks();
