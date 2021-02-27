@@ -1,39 +1,47 @@
-<br><button type="button" class="btn btn-primary" (click)="openModalForm(form, undefined)">Adicionar Livro</button>
+<div class="container">
+  <div class="form-inline mt-4">
+    <div class="form-group mx-sm-4">
+      <input class="form-control" type="text" placeholder="Buscar por Título" [(ngModel)]="bookFilter">
+    </div>
+    <div class="form-group mx-sm-4">
+      <button type="button" class="btn btn-primary" (click)="openModalForm(form, undefined)">Adicionar Livro</button>
+    </div>
+  </div>
 
-<div class="container"><br>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Título</th>
-        <th>Subtítulo</th>
-        <th>Quantidade de Páginas</th>
-        <th>Ano de Publicação</th>
-        <th>Versão</th>
-        <th>Autores</th>
-        <th style="text-align: center;">Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let book of books">
-        <td>{{ book.title }}</td>
-        <td>{{ book.caption }}</td>
-        <td>{{ book.pages }}</td>
-        <td>{{ book.year }}</td>
-        <td>{{ book.version }}</td>
-        <td>{{ book.authors }}</td>
-        <td style="text-align: center;">
-          <button type="button" class="btn btn-secondary btn-sm" (click)="openModalInfo(info, book.id)">
-            <i class="bi bi-info-square"></i></button>&nbsp;
-          <button type="button" class="btn btn-warning btn-sm" (click)="openModalForm(form, book.id)">
-            <i class="bi bi-pencil-square"></i></button>&nbsp;
-          <button type="button" class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">
-            <i class="bi bi-trash"></i></button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="mt-4">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Título</th>
+          <th>Subtítulo</th>
+          <th>Quantidade de Páginas</th>
+          <th>Ano de Publicação</th>
+          <th>Versão</th>
+          <th>Autores</th>
+          <th class="text-center">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of booksFiltrados">
+          <td>{{ book.title }}</td>
+          <td>{{ book.caption }}</td>
+          <td>{{ book.pages }}</td>
+          <td>{{ book.year }}</td>
+          <td>{{ book.version }}</td>
+          <td>{{ book.authors }}</td>
+          <td class="text-center">
+            <button type="button" class="btn btn-secondary btn-sm mr-2" (click)="openModalInfo(info, book.id)">
+              <i class="bi bi-info-square"></i></button>
+            <button type="button" class="btn btn-warning btn-sm mr-2" (click)="openModalForm(form, book.id)">
+              <i class="bi bi-pencil-square"></i></button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteBook(book.id)">
+              <i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
-
 <!-- Modal Form Adicionar ou Editar Livro -->
 <ng-template #form>
   <div class="modal-header">

@@ -1,8 +1,9 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
-import { Book } from '../models/book.model';
-import { BookService } from '../service/book.service';
-import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { NgForm } from '@angular/forms';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+
+import { Book } from '../../models/book.model';
+import { BookService } from '../../service/book.service';
 
 @Component({
   selector: 'app-book',
@@ -11,13 +12,24 @@ import { NgForm } from '@angular/forms';
 })
 export class BookComponent implements OnInit {
 
-  public books!: Book[];
+  books!: Book[];
 
-  public bookInfo!: Book | undefined;
+  bookInfo!: Book | undefined;
 
-  public modalRef!: BsModalRef;
+  modalRef!: BsModalRef;
 
-  public idAtual: string | undefined;
+  idAtual: string | undefined;
+
+  _bookFilter!: string;
+  get bookFilter(): string {
+    return this._bookFilter;
+  }
+  set bookFilter(value: string) {
+    this._bookFilter = value;
+    this.booksFiltrados = this.bookFilter ? this.filtrarBooks(this.bookFilter) : this.books;
+  }
+
+  booksFiltrados: any = [];
 
   constructor(private bookService: BookService, private modalService: BsModalService) {
     this.books = [];
@@ -50,10 +62,18 @@ export class BookComponent implements OnInit {
     this.getBooks();
   }
 
+  filtrarBooks(filtrarPor: string): any {
+    filtrarPor = filtrarPor.toLocaleLowerCase();
+    return this.books.filter(
+      book => book.title.toLocaleLowerCase().indexOf(filtrarPor) !== -1
+    );
+  }
+
   getBooks() {
     this.bookService.getBooks().subscribe(
       (books: Book[]) => {
         this.books = books;
+        this.booksFiltrados = books;
         console.log(books);
       },
       (erro: any) => {
@@ -77,6 +97,7 @@ export class BookComponent implements OnInit {
   onSubmit(myForm: NgForm) {
     console.log(this.idAtual);
     if (!this.idAtual) { // Adicionar
+      console.log(myForm.value.id);
       this.bookService.addBook(myForm.value).subscribe(
         (book: Book) => {
           this.getBooks();
