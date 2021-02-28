@@ -21,6 +21,8 @@ export class BookComponent implements OnInit {
 
   idAtual: string | undefined;
 
+  page: number = 1;
+
   _bookFilter!: string;
 
   booksFiltrados: any = [];

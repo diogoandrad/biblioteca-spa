@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let book of booksFiltrados">
+        <tr *ngFor="let book of booksFiltrados | paginate: { itemsPerPage: 6, currentPage: page }">
           <td>{{ book.title }}</td>
           <td>{{ book.caption }}</td>
           <td>{{ book.pages }}</td>
@@ -41,6 +41,8 @@
       </tbody>
     </table>
   </div>
+
+  <pagination-controls (pageChange)="page = $event"></pagination-controls>
 </div>
 <!-- Modal Form Adicionar ou Editar Livro -->
 <ng-template #form>
