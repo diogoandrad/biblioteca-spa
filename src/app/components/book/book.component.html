@@ -38,6 +38,9 @@
               <i class="bi bi-trash"></i></button>
           </td>
         </tr>
+        <tr *ngIf="booksFiltrados.length === 0">
+          <td class="text-center" colspan="7">Nenhum registro encontrado</td>
+        </tr>
       </tbody>
     </table>
   </div>

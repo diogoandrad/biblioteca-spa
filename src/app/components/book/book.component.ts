@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import  Swal  from 'sweetalert2';
+import Swal from 'sweetalert2';
 
 import { Book } from '../../models/book.model';
 import { BookService } from '../../service/book.service';
@@ -21,37 +21,40 @@ export class BookComponent implements OnInit {
 
   idAtual: string | undefined;
 
-  page: number = 1;
+  page: 1;
 
-  _bookFilter!: string;
+  bookFilterHas!: string;
 
   booksFiltrados: any = [];
 
   get bookFilter(): string {
-    return this._bookFilter;
+    return this.bookFilterHas;
   }
 
   set bookFilter(value: string) {
-    this._bookFilter = value;
+    this.bookFilterHas = value;
     this.booksFiltrados = this.bookFilter ? this.filtrarBooks(this.bookFilter) : this.books;
   }
 
   constructor(private bookService: BookService, private modalService: BsModalService) {
     this.books = [];
+    this.page = 1;
   }
 
   ngOnInit(): void {
     this.getBooks();
+    console.log(this.booksFiltrados);
   }
 
   openModalForm(form: TemplateRef<any>, id: string | undefined) {
     this.modalRef = this.modalService.show(form);
     this.idAtual = id;
 
-    if (id)
+    if (id) {
       this.getBookById(id);
-    else
+    } else {
       this.bookInfo = undefined;
+    }
 
     console.log(id);
   }
@@ -59,10 +62,11 @@ export class BookComponent implements OnInit {
   openModalInfo(info: TemplateRef<any>, id: string | undefined) {
     this.modalRef = this.modalService.show(info);
 
-    if (id)
+    if (id) {
       this.getBookById(id);
-    else
-      this.bookInfo = undefined
+    } else {
+      this.bookInfo = undefined;
+    }
 
     console.log(id, this.bookInfo);
   }
@@ -111,7 +115,7 @@ export class BookComponent implements OnInit {
             icon: 'success',
             showConfirmButton: false,
             timer: 1500
-          })
+          });
           this.getBooks();
         },
         (erro: any) => {
@@ -119,7 +123,7 @@ export class BookComponent implements OnInit {
             title: 'Erro!',
             text: 'Erro ao adicionar livro.',
             icon: 'error'
-          })
+          });
           console.log(erro);
         }
       );
@@ -133,7 +137,7 @@ export class BookComponent implements OnInit {
             icon: 'success',
             showConfirmButton: false,
             timer: 1500
-          })
+          });
           this.getBooks();
         },
         (erro: any) => {
@@ -141,7 +145,7 @@ export class BookComponent implements OnInit {
             title: 'Erro!',
             text: 'Erro ao editar livro.',
             icon: 'error'
-          })
+          });
           console.log(erro);
         }
       );
@@ -152,7 +156,7 @@ export class BookComponent implements OnInit {
   deleteBook(id: string) {
     Swal.fire({
       title: 'Você tem certeza?',
-      text: "O livro será excluido!",
+      text: 'O livro será excluido!',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -169,7 +173,7 @@ export class BookComponent implements OnInit {
               icon: 'success',
               showConfirmButton: false,
               timer: 1500
-            })
+            });
             this.getBooks();
           },
           (erro: any) => {
@@ -177,11 +181,11 @@ export class BookComponent implements OnInit {
               title: 'Erro!',
               text: 'Erro ao excluir livro.',
               icon: 'error'
-            })
+            });
             console.log(erro);
           }
         );
       }
-    })
+    });
   }
 }
