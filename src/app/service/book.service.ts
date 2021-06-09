@@ -8,7 +8,7 @@ import { Book } from '../models/book.model';
 })
 export class BookService {
 
-  apiUrl = 'http://localhost:8000/api/v1/books';
+  apiUrl = 'http://localhost:8000/api/Book';
 
   httpOptions = {
     headers: new HttpHeaders({
