@@ -21,7 +21,7 @@ export class BookComponent implements OnInit {
 
   idAtual: string | undefined;
 
-  page: 1;
+  page = 1;
 
   bookFilterHas!: string;
 
@@ -129,7 +129,7 @@ export class BookComponent implements OnInit {
       );
     } else { // Editar
       myForm.value.id = this.idAtual;
-      this.bookService.updateBook(this.idAtual, myForm.value).subscribe(
+      this.bookService.updateBook(myForm.value).subscribe(
         (book: Book) => {
           Swal.fire({
             title: 'Salvo!',
